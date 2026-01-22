@@ -2,294 +2,416 @@
 
 import Image from "next/image";
 import { Typewriter } from "react-simple-typewriter";
+import { ClockIcon, MapPinIcon, SparklesIcon } from "@heroicons/react/24/solid";
+import React, { useState } from "react"; 
+import Link from "next/link";
+import { DayPicker } from "react-day-picker"; 
+import "react-day-picker/style.css";
+
 
 export default function Hero() {
+  const [isSameLocation, setIsSameLocation] = useState(true);
+  const [dateSelected, setDateSelected] = useState<Date>();
+
   return (
     <section
-      id='home'
-      className='relative z-40 overflow-hidden pb-24 pt-28 sm:pt-36 lg:pb-[120px] lg:pt-[170px]'
+      id="home"
+      className="relative z-40 overflow-hidden pb-24 pt-28 sm:pt-36 lg:pb-[120px] lg:pt-[170px]"
     >
-      <div className='px-4 xl:container'>
-        <div className='-mx-4 flex flex-wrap items-center'>
-          <div className='w-full px-3 lg:w-1/2'>
-            <div className='mx-auto mb-12 max-w-[530px] text-center lg:mb-0 lg:ml-0 lg:text-left'>
-              <span className='bg-primary/5 font-heading text-primary mb-8 inline-block rounded-full px-5 py-[10px] text-base dark:bg-white/10 dark:text-white'>
-                <span className='bg-primary mr-2 inline-block h-2 w-2 rounded-full'></span>
-                Next.js Starter for Business
-              </span>
-              <h1 className='font-heading mb-5 text-2xl font-semibold sm:text-4xl md:text-[50px] md:leading-[60px] dark:text-white'>
+      <div className="mx-auto px-4 xl:container">
+        <div className="-mx-4 flex flex-wrap items-center justify-center">
+              
+          {/* Left Column */}          
+          <div className="w-full max-w-lg px-4 font-sans">
+            <form className="relative overflow-hidden rounded-3xl border border-white/20 bg-white p-8 shadow-[0_20px_50px_rgba(0,0,0,0.1)] backdrop-blur-sm">
+            
+              {/* Decorative Accent Elements */}
+              <div className="via-indigo-250 absolute left-0 top-0 h-1.5 w-full bg-gradient-to-r from-indigo-500 to-indigo-500" />
+              <div className="mb-8 text-center">
+
+                {/*pickup and dropoff Modal */}
+              <div className="bg-indigo-300 fixed h-[475px] w-[650px]">
+                <DayPicker
+                  animate
+                  mode="single"
+                  selected={dateSelected}
+                  onSelect={setDateSelected}
+                  footer={
+                    dateSelected ? `Selected: ${dateSelected.toLocaleDateString()}` 
+                    : "Pick a day."
+                  }
+                />
+                <div>{/* Calendar */}</div>
+                <div className="grid grid-cols-2 gap-4">
+                  <select
+                    aria-label="Pickup Time"
+                    name="pickupTime"
+                    className="h-16 block w-full rounded-sm border border-gray-500 bg-white px-4 text-black" 
+                    defaultValue=""               
+                  >
+                    <option value="" disabled hidden>
+                      Pickup Time
+                    </option>
+                    <option value="00:30:00">12:30 AM</option>
+                    <option value="01:00:00">1:00 AM</option>
+                    <option value="01:30:00">1:30 AM</option>
+                    <option value="02:00:00">2:00 AM</option>
+                    <option value="02:30:00">2:30 AM</option>
+                    <option value="03:00:00">3:00 AM</option>
+                    <option value="03:30:00">3:30 AM</option>
+                    <option value="04:00:00">4:00 AM</option>
+                    <option value="04:30:00">4:30 AM</option>
+                    <option value="05:00:00">5:00 AM</option>
+                    <option value="05:30:00">5:30 AM</option>
+                    <option value="06:00:00">6:00 AM</option>
+                    <option value="06:30:00">6:30 AM</option>
+                    <option value="07:00:00">7:00 AM</option>
+                    <option value="07:30:00">7:30 AM</option>
+                    <option value="08:00:00">8:00 AM</option>
+                    <option value="08:30:00">8:30 AM</option>
+                    <option value="09:00:00">9:00 AM</option>
+                    <option value="09:30:00">9:30 AM</option>
+                    <option value="10:00:00">10:00 AM</option>
+                    <option value="10:30:00">10:30 AM</option>
+                    <option value="11:00:00">11:00 AM</option>
+                    <option value="11:30:00">11:30 AM</option>
+                    <option value="12:00:00">12:00 PM</option>
+                    <option value="12:30:00">12:30 PM</option>
+                    <option value="13:00:00">1:00 PM</option>
+                    <option value="13:30:00">1:30 PM</option>
+                    <option value="14:00:00">2:00 PM</option>
+                    <option value="14:30:00">2:30 PM</option>
+                    <option value="15:00:00">3:00 PM</option>
+                    <option value="15:30:00">3:30 PM</option>
+                    <option value="16:00:00">4:00 PM</option>
+                    <option value="16:30:00">4:30 PM</option>
+                    <option value="17:00:00">5:00 PM</option>
+                    <option value="17:30:00">5:30 PM</option>
+                    <option value="18:00:00">6:00 PM</option>
+                    <option value="18:30:00">6:30 PM</option>
+                    <option value="19:00:00">7:00 PM</option>
+                    <option value="19:30:00">7:30 PM</option>
+                    <option value="20:00:00">8:00 PM</option>
+                    <option value="20:30:00">8:30 PM</option>
+                    <option value="21:00:00">9:00 PM</option>
+                    <option value="21:30:00">9:30 PM</option>
+                    <option value="22:00:00">10:00 PM</option>
+                    <option value="22:30:00">10:30 PM</option>
+                    <option value="23:00:00">11:00 PM</option>
+                    <option value="23:30:00">11:30 PM</option>
+                    <option value="00:00:00">12:00 AM</option>
+                  </select>
+                  <ClockIcon className="size-6 text-indigo-600 pointer-events-none absolute left-2 top-1/2 z-10 flex -translate-y-1/2 " />
+                </div>
+              </div>
+                <h2 className="text-3xl font-extrabold tracking-tight text-slate-900">
+                  Book your Hertz car rental today!
+                </h2>
+                <p className="mt-2 text-sm text-slate-500">
+                  Premium Hertz rentals at your fingertips.
+                </p>                
+              </div>
+                
+              {/* 3. Conditional Logic for Inputs */}
+              {isSameLocation ? (
+                // Single Input Mode
+                <InputWithIcon
+                  type="text"
+                  id="pickup-dropoff-location"
+                  name="Pickup & Drop-off Location"
+                  placeholder="e.g., DFW Airport"
+                >
+                  <MapPinIcon className="size-5" />
+                </InputWithIcon>
+              ) : (
+                
+                <>
+                   
+                  {/* Pickup Location */}
+                  <InputWithIcon
+                    type="text"
+                    id="pickup-location"
+                    name="pickup-location"
+                    placeholder="e.g., DFW Airport"
+                  >
+                    <MapPinIcon className="size-5" />
+                  </InputWithIcon>
+
+                  {/* Drop-Off Location */}
+                  <InputWithIcon
+                    type="text"
+                    id="dropoff-location"
+                    name="dropoff-location"
+                    placeholder="e.g., DFW Airport"
+                  >
+                    <MapPinIcon className="size-5" />
+                  </InputWithIcon>
+                </>
+              )}
+
+             
+
+              {/* Same Dropoff Checkbox */}
+              <div className="mb-8 flex items-center gap-3">
+                <div className="relative inline-flex h-6 w-11 shrink-0 cursor-pointer items-center">
+                  <input
+                    id="same-dropoff"
+                    type="checkbox"
+                    checked={isSameLocation}
+                    onChange={() => setIsSameLocation(!isSameLocation)} // 4. Toggle the state
+                    className="h-5 w-5 cursor-pointer rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                  />
+                </div>
+                <label
+                  htmlFor="same-dropoff"
+                  className="block cursor-pointer select-none text-sm font-medium text-slate-700"
+                >
+                  Same Drop-Off Location
+                </label>
+              </div>
+              {/* Dates Grid */}
+              <div className="mb-8 grid grid-cols-2 gap-4">
+                <div className="group">
+                  <label
+                    htmlFor="pickup-date"
+                    className="mb-2 flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-slate-500 group-focus-within:text-indigo-600"
+                  >
+                    Pickup Date
+                  </label>
+                  <input
+                    type="date"
+                    id="pickup-date"
+                    name="pickup-date"
+                    className="w-full rounded-2xl border-2 border-slate-100 bg-slate-50 px-4 py-3 font-semibold text-slate-900 transition-all focus:border-indigo-500 focus:bg-white focus:outline-none"
+                  />
+                </div>
+
+                <div className="group">
+                  <label
+                    htmlFor="return-date"
+                    className="mb-2 flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-slate-500 group-focus-within:text-indigo-600"
+                  >
+                    Return Date
+                  </label>
+                  <input
+                    type="date"
+                    id="return-date"
+                    name="return-date"
+                    className="w-full rounded-2xl border-2 border-slate-100 bg-slate-50 px-4 py-3 font-semibold text-slate-900 transition-all focus:border-indigo-500 focus:bg-white focus:outline-none"
+                  />
+                </div>
+              </div>
+
+              {/* Submit Button (Optional placeholder) */}
+              <button
+                type="button"
+                className="hover:shadow-2xs w-full rounded-full bg-gradient-to-r from-indigo-200 to-indigo-700 py-4 text-base font-medium text-white shadow-lg transition-all duration-300 hover:from-indigo-300 hover:to-indigo-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+              >
+                Find a Car
+              </button>
+            </form>
+          
+          </div>
+          
+          {/* Right Column */}
+
+          <div className="w-full px-4 lg:w-7/12">
+            <div className="mx-auto mb-12 max-w-[720px] text-center lg:mb-0 lg:ml-0 lg:text-left">
+              <h1 className="font-heading mb-5 max-w-[530px] text-2xl font-semibold sm:text-4xl md:text-[50px] md:leading-[60px] dark:text-white">
                 Next.js Boilerplate for Your{" "}
                 <Typewriter
                   words={["Startup", "SaaS", "Business", "Agency"]}
                   cursor
                   loop={0}
-                  cursorStyle='|'
+                  cursorStyle="|"
                   typeSpeed={70}
                   deleteSpeed={50}
                   delaySpeed={1000}
                 />
               </h1>
-              <p className='text-dark-text mb-12 text-base'>
+              <p className="text-dark-text mb-12 text-base">
                 Handcrafted Next.js starter for your next - Startup, Business,
-                Agency or SaaS Website. Comes with refreshing design,
-                integrations and everything you need to kickstart your next web
-                project.
+                Agency or SaaS Website.
               </p>
-              <div className='flex flex-wrap items-center justify-center lg:justify-start'>
-                <a
-                  href='#features'
-                  className='bg-primary font-heading hover:bg-primary/90 inline-flex items-center rounded-sm px-6 py-[10px] text-base text-white md:px-8 md:py-[14px]'
-                >
-                  Get Started
-                  <span className='pl-3'>
-                    <svg
-                      width='16'
-                      height='16'
-                      viewBox='0 0 16 16'
-                      fill='none'
-                      xmlns='http://www.w3.org/2000/svg'
-                    >
-                      <path
-                        d='M12.172 7L6.808 1.636L8.222 0.222L16 8L8.222 15.778L6.808 14.364L12.172 9H0V7H12.172Z'
-                        fill='white'
-                      />
-                    </svg>
-                  </span>
-                </a>
-                <a
-                  href='#about'
-                  className='font-heading text-dark hover:text-primary dark:hover:text-primary inline-flex items-center rounded-sm px-8 py-[14px] text-base dark:text-white'
-                >
-                  <span className='pr-3'>
-                    <svg
-                      width='24'
-                      height='24'
-                      viewBox='0 0 24 24'
-                      className='fill-current'
-                    >
-                      <path d='M19.376 12.416L8.777 19.482C8.70171 19.5321 8.61423 19.5608 8.52389 19.5652C8.43355 19.5695 8.34373 19.5492 8.264 19.5065C8.18427 19.4639 8.1176 19.4003 8.07111 19.3228C8.02462 19.2452 8.00005 19.1564 8 19.066V4.934C8.00005 4.84356 8.02462 4.75482 8.07111 4.67724C8.1176 4.59966 8.18427 4.53615 8.264 4.49346C8.34373 4.45077 8.43355 4.43051 8.52389 4.43483C8.61423 4.43915 8.70171 4.46789 8.777 4.518L19.376 11.584C19.4445 11.6297 19.5006 11.6915 19.5395 11.7641C19.5783 11.8367 19.5986 11.9177 19.5986 12C19.5986 12.0823 19.5783 12.1633 19.5395 12.2359C19.5006 12.3085 19.4445 12.3703 19.376 12.416Z' />
-                    </svg>
-                  </span>
-                  How it Work
-                </a>
+              <div className="flex flex-wrap items-center justify-center lg:justify-start">
+                <h2 className="text-3xl font-bold text-white sm:text-4xl">
+                  Meet our newest fleet
+                </h2>
+                <p className="mt-4 text-lg text-white">
+                  New rentalcars. Round trip or one-way. Let's go!
+                </p>
               </div>
-            </div>
-          </div>
-          <div className='w-full px-4 lg:w-1/2'>
-            <div className='wow fadeInRight relative z-30 mx-auto h-[560px] w-full max-w-[700px] lg:ml-0'>
-              <div className='absolute right-0 top-0 lg:w-11/12'>
-                <Image
-                  src='/images/hero/image-2.png'
-                  alt='hero-image'
-                  className='object-cover aspect-[1.08] h-auto'
-                  width={560}
-                  height={520}
-                />
-              </div>
-              <div className='absolute bottom-0 left-0 z-10'>
-                <Image
-                  src='/images/hero/image-1.jpg'
-                  className='object-cover'
-                  alt='hero-image'
-                  width={350}
-                  height={420}
-                />
-                <div className='border-primary/10 bg-primary/5 absolute -right-6 -top-6 -z-10 h-full w-full border backdrop-blur-[6px] dark:border-white/10 dark:bg-white/10'></div>
-              </div>
-              <div className='absolute bottom-0 left-0'>
-                <svg
-                  width='72'
-                  height='38'
-                  viewBox='0 0 72 38'
-                  fill='none'
-                  xmlns='http://www.w3.org/2000/svg'
-                >
-                  <path
-                    fillRule='evenodd'
-                    clipRule='evenodd'
-                    d='M62.0035 2.04985C59.6808 1.76671 57.4524 2.70929 55.1508 4.68209C51.3631 7.92863 44.7908 9.54366 38.8668 4.69678C36.329 2.6204 34.117 2.29213 32.2894 2.59672C30.3972 2.91209 28.8057 3.92088 27.5547 4.75487C25.5734 6.07577 23.3915 7.46379 20.8786 7.78953C18.2847 8.12577 15.515 7.32034 12.3598 4.69105C9.71804 2.48955 7.45748 2.0661 5.72104 2.33325C3.94436 2.6066 2.56003 3.6273 1.76341 4.56877C1.40666 4.99037 0.775686 5.04295 0.354079 4.68621C-0.0675277 4.32946 -0.120109 3.69849 0.236635 3.27688C1.27334 2.05168 3.0643 0.71846 5.41692 0.356509C7.80979 -0.0116349 10.6326 0.648246 13.6402 3.1546C16.485 5.52529 18.7154 6.05321 20.6215 5.80612C22.6086 5.54854 24.4266 4.43657 26.4453 3.09078L27 3.92282L26.4453 3.09078C27.6943 2.25809 29.6028 1.0169 31.9606 0.623935C34.383 0.220203 37.1711 0.725274 40.1333 3.14886C45.1548 7.25733 50.6369 5.9169 53.8492 3.16356C56.3795 0.994798 59.1512 -0.312658 62.2455 0.0645503C65.3089 0.43799 68.4333 2.43425 71.7557 6.26783C72.1174 6.68518 72.0723 7.31674 71.655 7.67845C71.2376 8.04015 70.606 7.99504 70.2443 7.57769C67.0668 3.91125 64.3571 2.33677 62.0035 2.04985Z'
-                    fill='#4A6CF7'
-                  />
-                  <path
-                    fillRule='evenodd'
-                    clipRule='evenodd'
-                    d='M62.0035 11.9726C59.6808 11.6895 57.4524 12.6321 55.1508 14.6049C51.3631 17.8514 44.7908 19.4664 38.8668 14.6196C36.329 12.5432 34.117 12.2149 32.2894 12.5195C30.3972 12.8349 28.8057 13.8437 27.5547 14.6776C25.5734 15.9985 23.3915 17.3866 20.8786 17.7123C18.2847 18.0485 15.515 17.2431 12.3598 14.6138C9.71804 12.4123 7.45748 11.9889 5.72104 12.256C3.94436 12.5294 2.56003 13.5501 1.76341 14.4915C1.40666 14.9131 0.775686 14.9657 0.354079 14.609C-0.0675277 14.2522 -0.120109 13.6213 0.236635 13.1997C1.27334 11.9745 3.0643 10.6412 5.41692 10.2793C7.80979 9.91114 10.6326 10.571 13.6402 13.0774C16.485 15.4481 18.7154 15.976 20.6215 15.7289C22.6086 15.4713 24.4266 14.3594 26.4453 13.0136L27 13.8456L26.4453 13.0136C27.6943 12.1809 29.6028 10.9397 31.9606 10.5467C34.383 10.143 37.1711 10.648 40.1333 13.0716C45.1548 17.1801 50.6369 15.8397 53.8492 13.0863C56.3795 10.9176 59.1512 9.61012 62.2455 9.98733C65.3089 10.3608 68.4333 12.357 71.7557 16.1906C72.1174 16.608 72.0723 17.2395 71.655 17.6012C71.2376 17.9629 70.606 17.9178 70.2443 17.5005C67.0668 13.834 64.3571 12.2595 62.0035 11.9726Z'
-                    fill='#4A6CF7'
-                  />
-                  <path
-                    fillRule='evenodd'
-                    clipRule='evenodd'
-                    d='M62.0035 21.8954C59.6808 21.6123 57.4524 22.5548 55.1508 24.5276C51.3631 27.7742 44.7908 29.3892 38.8668 24.5423C36.329 22.4659 34.117 22.1377 32.2894 22.4423C30.3972 22.7576 28.8057 23.7664 27.5547 24.6004C25.5734 25.9213 23.3915 27.3093 20.8786 27.6351C18.2847 27.9713 15.515 27.1659 12.3598 24.5366C9.71804 22.3351 7.45748 21.9117 5.72104 22.1788C3.94436 22.4521 2.56003 23.4728 1.76341 24.4143C1.40666 24.8359 0.775686 24.8885 0.354079 24.5318C-0.0675277 24.175 -0.120109 23.544 0.236635 23.1224C1.27334 21.8972 3.0643 20.564 5.41692 20.2021C7.80979 19.8339 10.6326 20.4938 13.6402 23.0002C16.485 25.3708 18.7154 25.8988 20.6215 25.6517C22.6086 25.3941 24.4266 24.2821 26.4453 22.9363L27 23.7684L26.4453 22.9363C27.6943 22.1036 29.6028 20.8624 31.9606 20.4695C34.383 20.0658 37.1711 20.5708 40.1333 22.9944C45.1548 27.1029 50.6369 25.7624 53.8492 23.0091C56.3795 20.8403 59.1512 19.5329 62.2455 19.9101C65.3089 20.2835 68.4333 22.2798 71.7557 26.1134C72.1174 26.5307 72.0723 27.1623 71.655 27.524C71.2376 27.8857 70.606 27.8406 70.2443 27.4232C67.0668 23.7568 64.3571 22.1823 62.0035 21.8954Z'
-                    fill='#4A6CF7'
-                  />
-                  <path
-                    fillRule='evenodd'
-                    clipRule='evenodd'
-                    d='M62.0035 31.8182C59.6808 31.535 57.4524 32.4776 55.1508 34.4504C51.3631 37.697 44.7908 39.312 38.8668 34.4651C36.329 32.3887 34.117 32.0605 32.2894 32.365C30.3972 32.6804 28.8057 33.6892 27.5547 34.5232C25.5734 35.8441 23.3915 37.2321 20.8786 37.5579C18.2847 37.8941 15.515 37.0887 12.3598 34.4594C9.71804 32.2579 7.45748 31.8344 5.72104 32.1016C3.94436 32.3749 2.56003 33.3956 1.76341 34.3371C1.40666 34.7587 0.775686 34.8113 0.354079 34.4545C-0.0675277 34.0978 -0.120109 33.4668 0.236635 33.0452C1.27334 31.82 3.0643 30.4868 5.41692 30.1248C7.80979 29.7567 10.6326 30.4166 13.6402 32.9229C16.485 35.2936 18.7154 35.8215 20.6215 35.5745C22.6086 35.3169 24.4266 34.2049 26.4453 32.8591L27 33.6911L26.4453 32.8591C27.6943 32.0264 29.6028 30.7852 31.9606 30.3923C34.383 29.9885 37.1711 30.4936 40.1333 32.9172C45.1548 37.0257 50.6369 35.6852 53.8492 32.9319C56.3795 30.7631 59.1512 29.4557 62.2455 29.8329C65.3089 30.2063 68.4333 32.2026 71.7557 36.0362C72.1174 36.4535 72.0723 37.0851 71.655 37.4468C71.2376 37.8085 70.606 37.7634 70.2443 37.346C67.0668 33.6796 64.3571 32.1051 62.0035 31.8182Z'
-                    fill='#4A6CF7'
-                  />
-                </svg>
-              </div>
-              <div className='absolute bottom-0 left-1/2'>
-                <svg
-                  width='120'
-                  height='120'
-                  viewBox='0 0 120 120'
-                  fill='none'
-                  xmlns='http://www.w3.org/2000/svg'
-                >
-                  <path
-                    opacity='0.9'
-                    d='M120 60C120 93.1371 93.1371 120 60 120C26.8629 120 0 93.1371 0 60C0 26.8629 26.8629 0 60 0C93.1371 0 120 26.8629 120 60Z'
-                    fill='url(#paint0_angular_300_926)'
-                  />
-                  <defs>
-                    <radialGradient
-                      id='paint0_angular_300_926'
-                      cx='0'
-                      cy='0'
-                      r='1'
-                      gradientUnits='userSpaceOnUse'
-                      gradientTransform='translate(60 60) rotate(90) scale(60)'
-                    >
-                      <stop stopColor='#4A6CF7' />
-                      <stop
-                        offset='1'
-                        stopColor='#111722'
-                      />
-                    </radialGradient>
-                  </defs>
-                </svg>
+              <div className="mt-10 flex-wrap sm:flex">
+                <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
+                  <div className=" border-white/20">
+                    <h3 className="text-xl font-bold text-white">
+                      #1 Loyalty Program
+                    </h3>
+                    <p className="mt-2 text-gray-200">
+                      Voted by customers via Newsweek*
+                    </p>
+                  </div>
+                  <div className=" border-white/20">
+                    <h4 className="text-xl font-bold text-white">
+                      Skip the line
+                    </h4>
+                    <p className="mt-2 text-gray-200">No hassle, just drive</p>
+                  </div>
+                  <div className=" border-white/20">
+                    <h5 className="text-xl font-bold text-white">
+                      Trusted for 100+ years
+                    </h5>
+                    <p className="mt-2 text-gray-200">
+                      With 10k+ rental locations worldwide
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div className='bg-noise-pattern absolute bottom-0 left-0 -z-10 h-full w-full bg-cover bg-center opacity-10 dark:opacity-40'></div>
-      <div className='absolute right-0 top-0 -z-10'>
+      <div className="bg-noise-pattern absolute bottom-0 left-0 -z-10 h-full w-full bg-cover bg-center opacity-10 dark:opacity-40"></div>
+      <div className="absolute right-0 top-0 -z-10">
         <svg
-          width='1356'
-          height='860'
-          viewBox='0 0 1356 860'
-          fill='none'
-          xmlns='http://www.w3.org/2000/svg'
+          width="1356"
+          height="860"
+          viewBox="0 0 1356 860"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
         >
-          <g
-            opacity='0.5'
-            filter='url(#filter0_f_201_2181)'
-          >
+          <g opacity="0.5" filter="url(#filter0_f_201_2181)">
             <rect
-              x='450.088'
-              y='-126.709'
-              width='351.515'
-              height='944.108'
-              transform='rotate(-34.6784 450.088 -126.709)'
-              fill='url(#paint0_linear_201_2181)'
+              x="450.088"
+              y="-126.709"
+              width="351.515"
+              height="944.108"
+              transform="rotate(-34.6784 450.088 -126.709)"
+              fill="url(#paint0_linear_201_2181)"
             />
           </g>
           <defs>
             <filter
-              id='filter0_f_201_2181'
-              x='0.0878906'
-              y='-776.711'
-              width='1726.24'
-              height='1876.4'
-              filterUnits='userSpaceOnUse'
-              colorInterpolationFilters='sRGB'
+              id="filter0_f_201_2181"
+              x="0.0878906"
+              y="-776.711"
+              width="1726.24"
+              height="1876.4"
+              filterUnits="userSpaceOnUse"
+              colorInterpolationFilters="sRGB"
             >
-              <feFlood
-                floodOpacity='0'
-                result='BackgroundImageFix'
-              />
+              <feFlood floodOpacity="0" result="BackgroundImageFix" />
               <feBlend
-                mode='normal'
-                in='SourceGraphic'
-                in2='BackgroundImageFix'
-                result='shape'
+                mode="normal"
+                in="SourceGraphic"
+                in2="BackgroundImageFix"
+                result="shape"
               />
               <feGaussianBlur
-                stdDeviation='225'
-                result='effect1_foregroundBlur_201_2181'
+                stdDeviation="225"
+                result="effect1_foregroundBlur_201_2181"
               />
             </filter>
             <linearGradient
-              id='paint0_linear_201_2181'
-              x1='417.412'
-              y1='59.4717'
-              x2='966.334'
-              y2='603.857'
-              gradientUnits='userSpaceOnUse'
+              id="paint0_linear_201_2181"
+              x1="417.412"
+              y1="59.4717"
+              x2="966.334"
+              y2="603.857"
+              gradientUnits="userSpaceOnUse"
             >
-              <stop stopColor='#ABBCFF' />
-              <stop
-                offset='0.859375'
-                stopColor='#4A6CF7'
-              />
+              <stop stopColor="#ABBCFF" />
+              <stop offset="0.859375" stopColor="#4A6CF7" />
             </linearGradient>
           </defs>
         </svg>
       </div>
-      <div className='absolute bottom-0 left-0 -z-10'>
+      <div className="absolute bottom-0 left-0 -z-10">
         <svg
-          width='1469'
-          height='498'
-          viewBox='0 0 1469 498'
-          fill='none'
-          xmlns='http://www.w3.org/2000/svg'
+          width="1469"
+          height="498"
+          viewBox="0 0 1469 498"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
         >
-          <g
-            opacity='0.3'
-            filter='url(#filter0_f_201_2182)'
-          >
+          <g opacity="0.3" filter="url(#filter0_f_201_2182)">
             <rect
-              y='450'
-              width='1019'
-              height='261'
-              fill='url(#paint0_linear_201_2182)'
+              y="450"
+              width="1019"
+              height="261"
+              fill="url(#paint0_linear_201_2182)"
             />
           </g>
           <defs>
             <filter
-              id='filter0_f_201_2182'
-              x='-450'
-              y='0'
-              width='1919'
-              height='1161'
-              filterUnits='userSpaceOnUse'
-              colorInterpolationFilters='sRGB'
+              id="filter0_f_201_2182"
+              x="-450"
+              y="0"
+              width="1919"
+              height="1161"
+              filterUnits="userSpaceOnUse"
+              colorInterpolationFilters="sRGB"
             >
-              <feFlood
-                floodOpacity='0'
-                result='BackgroundImageFix'
-              />
+              <feFlood floodOpacity="0" result="BackgroundImageFix" />
               <feBlend
-                mode='normal'
-                in='SourceGraphic'
-                in2='BackgroundImageFix'
-                result='shape'
+                mode="normal"
+                in="SourceGraphic"
+                in2="BackgroundImageFix"
+                result="shape"
               />
               <feGaussianBlur
-                stdDeviation='225'
-                result='effect1_foregroundBlur_201_2182'
+                stdDeviation="225"
+                result="effect1_foregroundBlur_201_2182"
               />
             </filter>
             <linearGradient
-              id='paint0_linear_201_2182'
-              x1='-94.7239'
-              y1='501.47'
-              x2='-65.8058'
-              y2='802.2'
-              gradientUnits='userSpaceOnUse'
+              id="paint0_linear_201_2182"
+              x1="-94.7239"
+              y1="501.47"
+              x2="-65.8058"
+              y2="802.2"
+              gradientUnits="userSpaceOnUse"
             >
-              <stop stopColor='#ABBCFF' />
-              <stop
-                offset='0.859375'
-                stopColor='#4A6CF7'
-              />
+              <stop stopColor="#ABBCFF" />
+              <stop offset="0.859375" stopColor="#4A6CF7" />
             </linearGradient>
           </defs>
         </svg>
       </div>
     </section>
+  );
+}
+
+function InputWithIcon({
+  type,
+  id,
+  name,
+  placeholder,
+  children,
+}: {
+  type: string;
+  id: string;
+  name: string;
+  placeholder: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <div className="group mb-6">
+      <label className="mb-2 items-center gap-2 text-xs font-bold uppercase tracking-wider text-slate-500 transition-colors group-focus-within:text-indigo-600">
+        {name}
+      </label>
+      <div className="relative items-center">
+        <div className="pointer-events-none absolute left-4 top-1/2 z-10 flex -translate-y-1/2 items-center text-indigo-600">
+          {children}
+        </div>
+        <input
+          type={type}
+          id={id}
+          name={name}
+          placeholder={placeholder}
+          className="w-full rounded-2xl border-2 border-slate-100 bg-slate-50 py-4 pl-12 pr-4 text-lg font-semibold text-slate-900 transition-all placeholder:font-normal placeholder:text-slate-400 focus:border-indigo-500 focus:bg-white focus:outline-none focus:ring-4 focus:ring-indigo-500/10"
+        />
+      </div>
+    </div>
   );
 }

@@ -1,19 +1,19 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Lexend:wght@200;300;400;500;600;700;800;900&display=swap')
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Lexend:wght@200;300;400;500;600;700;800;900&display=swap")
 layer(base);
 
-@import 'tailwindcss';
+@import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
 @custom-variant dark (&:is(.dark *));
 
 @theme {
   --font-*: initial;
-  --font-heading: 'Lexend', sans-serif;
-  --font-body: 'Inter', sans-serif;
+  --font-heading: "Lexend", sans-serif;
+  --font-body: "Inter", sans-serif;
 
   --breakpoint-*: initial;
   --breakpoint-sm: 540px;
-  --breakpoint-md: 768px;
+  --breakpoint-md: 768px; /* md:grid-cols-2 */
   --breakpoint-lg: 1024px;
   --breakpoint-xl: 1140px;
   --breakpoint-2xl: 1320px;
@@ -22,14 +22,31 @@ layer(base);
   --color-current: currentColor;
   --color-transparent: transparent;
   --color-white: #ffffff;
-  --color-primary: #4a6cf7;
-  --color-dark-text: #79808a;
-  --color-dark: #111722;
-  --color-stroke: #e5e7eb;
+  --color-primary: oklch(0.55 0.25 272);
+  --color-dark-text: oklch(0.55 0.05 272);
+  --color-dark: oklch(0.14 0.05 272);
+  --color-stroke: oklch(0.92 0.01 272);
 
-  --background-image-noise-pattern: url('/images/NoisePattern.svg');
+  --color-rindigo-100: oklch(0.96 0.02 272);
+  --color-rindigo-200: oklch(0.85 0.05 272);
+  --color-rindigo-300: oklch(0.7 0.1 272);
+  --color-rindigo-400: oklch(0.6 0.18 272);
+  --color-rindigo-500: oklch(0.55 0.25 272);
+  --color-rindigo-600: oklch(0.45 0.22 272);
+  --color-rindigo-700: oklch(0.35 0.18 272);
 
-  --drop-shadow-light: drop-shadow(0px 1px 5px rgba(0, 0, 0, 0.1));
+  --background-image-noise-pattern: url("/images/NoisePattern.svg");
+
+  /* Deep Indigo Gradient for Hero */
+  --background-image-hero-gradient: linear-gradient(
+    54.2deg,
+    oklch(0.1 0.05 272) 20%,
+    oklch(0.2 0.1 272)
+  );
+
+  /* Vibrant Indigo Gradient for Buttons */
+  --background-image-button: linear-gradient(112deg, oklch(0.65 0.2 272) 18)
+    --drop-shadow-light: drop-shadow(0px 1px 5px rgba(0, 0, 0, 0.1));
 }
 
 @utility container {
@@ -67,7 +84,7 @@ layer(base);
 @utility sticky-navbar {
   @apply fixed! z-999 bg-white/80! py-2! transition! dark:bg-dark!;
   backdrop-filter: blur(5px);
-  box-shadow: inset 0 -1px 0 0 rgba(0, 0, 0, 0.1);
+  box-shadow: inset 0 -1px 0 0 rgba(79, 70, 229, 0.1); /* Updated shadow color to indigo tint */
 
   & .navbar > li > a {
     @apply lg:py-5;
@@ -138,17 +155,18 @@ layer(base);
 }
 
 @utility title {
+  /* Updated gradient to match new Indigo Primary */
   background: linear-gradient(
     180deg,
-    rgba(74, 108, 247, 0.4) 0%,
-    rgba(74, 108, 247, 0) 100%
+    rgba(74, 108, 247, 0.5) 0%,
+    rgba(74, 108, 247, 0.02) 100%
   );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   text-fill-color: transparent;
-  opacity: 0.2;
-  @apply absolute left-1/2 top-0 -translate-x-1/2 text-[40px] font-extrabold leading-none! sm:text-[60px] lg:text-[95px];
+  opacity: 1;
+  @apply leading-none! absolute left-1/2 top-0 -translate-x-1/2 text-[40px] font-extrabold sm:text-[60px] lg:text-[95px];
 }
 
 @utility submenu-item {
@@ -181,7 +199,7 @@ layer(base);
   }
 
   .tns-controls button {
-    @apply flex size-10 items-center justify-center rounded-full bg-primary/10 text-primary hover:bg-primary hover:text-white dark:bg-white/10 dark:text-white dark:hover:bg-primary dark:hover:text-white;
+    @apply bg-primary/10 text-primary hover:bg-primary dark:hover:bg-primary flex size-10 items-center justify-center rounded-full hover:text-white dark:bg-white/10 dark:text-white dark:hover:text-white;
   }
 }
 

@@ -1,5 +1,5 @@
 import { defineConfig } from "sanity";
-import { deskTool } from "sanity/desk";
+import { structureTool } from "sanity/structure";
 import schemas from "./src/sanity/schemas";
 
 const config = defineConfig({
@@ -8,7 +8,7 @@ const config = defineConfig({
   dataset: "production",
   apiVersion: "2023-06-18",
   basePath: "/admin",
-  plugins: [deskTool()],
+  plugins: [structureTool()],
   schema: { types: schemas },
 } as any);
 

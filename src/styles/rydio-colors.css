@@ -1,0 +1,56 @@
+@layer monochromatic, complementary, analogous, triadic, neutrual;
+
+@layer monochromatic {
+  * {
+    --base: oklch(0.35 0.15 220);
+    --base50: oklch(0.5 0.15 220);
+    --base65: oklch(0.65 0.15 220);
+    --base80: hsl(220 40% 60%);
+    --base95: hsl(220 40% 95%);
+    --base: oklch(0.35 0.15 220);
+    --base34: oklch(0.34 0.15 220);
+    --base49: oklch(0.49 0.15 220);
+    --base64: oklch(0.64 0.15 220);
+    --base79: oklch(0.79 0.15 220);
+  }
+}
+
+@layer complementary {
+  * {
+    --complementary: oklch(0.35 0.15 40);
+    --complementary50: oklch(0.5 0.15 40);
+    --complementary65: oklch(0.65 0.15 40);
+    --complementary80: hsl(40 40% 60%);
+    --complementary95: hsl(40 40% 95%);
+  }
+}
+
+@layer analogous {
+  * {
+    --analogous1: oklch(0.35 0.15 160);
+    --analogous150: oklch(0.5 0.15 160);
+    --analogous165: oklch(0.65 0.15 160);
+    --analogous180: hsl(160 40% 60%);
+    --analogous195: hsl(160 40% 95%);
+  }
+}
+
+@layer triadic {
+  * {
+    --triadic1: oklch(0.35 0.15 280);
+    --triadic150: oklch(0.5 0.15 280);
+    --triadic165: oklch(0.65 0.15 280);
+    --triadic180: hsl(280 40% 60%);
+    --triadic195: hsl(280 40% 95%);
+  }
+}
+
+@layer neutrual {
+  * {
+    --neutral-dark: oklch(0.15 0.02 220);
+    --neutral-medium: oklch(0.5 0.02 220);
+    --neutral-light: oklch(0.85 0.02 220);
+    --neutral-lighter: hsl(220 10% 95%);
+    --neutral-darker: hsl(220 10% 15%);
+  }
+}

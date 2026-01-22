@@ -1,13 +1,14 @@
 import SectionTitle from "../Common/SectionTitle";
-import AboutContent from "./AboutContent";
+import FleetContent from "./FleetContent";
+import AboutContent from "./FleetContent";
 
-export default function About() {
+export default function Fleet() {
   return (
-    <section id="about" className="pt-14 sm:pt-20 lg:pt-[130px]">
+    <section id="fleet" className="pt-14 sm:pt-20 lg:pt-[130px]">
       <div className="px-4 xl:container">
         <SectionTitle
-          mainTitle="ABOUT US"
-          title="Know Details About Our Company"
+          mainTitle="Fleet"
+          title="See Our Extensive Fleet of Vehicles"
           paragraph="Lorem ipsum dolor sit amet, consectetur adipiscing elit. In convallis tortor eros. Donec vitae tortor lacus. Phasellus aliquam ante in maximus."
         />
 
@@ -67,7 +68,7 @@ export default function About() {
               </defs>
             </svg>
           </div>
-          <AboutContent />
+          <FleetContent />
         </div>
       </div>
     </section>

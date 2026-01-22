@@ -1,9 +1,9 @@
 const integrations = {
-  isSanityEnabled: false,
-  isStripeEnabled: true,
-  isAlgoliaEnabled: true,
-  isMailchimpEnabled: true,
-  isAuthEnabled: true,
+  isSanityEnabled: true,
+  isStripeEnabled: false,
+  isAlgoliaEnabled: false,
+  isMailchimpEnabled: false,
+  isAuthEnabled: false,
 };
 
 const messages = {
@@ -76,4 +76,3 @@ const messages = {
 };
 
 export { integrations, messages };
-

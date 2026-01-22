@@ -11,6 +11,8 @@ import Support from "@/components/Support";
 import Team from "@/components/Team";
 import { Metadata } from "next";
 import { integrations, messages } from "../../../integrations.config";
+import Offers from "@/components/Home/Offers";
+import Fleet from "@/components/Fleet";
 
 const siteName = process.env.SITE_NAME;
 
@@ -24,11 +26,13 @@ export default function Home() {
   return (
     <>
       <Hero />
+      <Offers />
       <Features />
       <About />
       <Team />
       <Portfolio />
       <Testimonials />
+      <Fleet />
       <Brands />
       <Pricing />
       {integrations?.isSanityEnabled && <HomeBlogSection />}
