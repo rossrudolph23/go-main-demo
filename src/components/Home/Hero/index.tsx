@@ -1,120 +1,51 @@
 "use client";
 
-import Image from "next/image";
 import { Typewriter } from "react-simple-typewriter";
-import { ClockIcon, MapPinIcon, SparklesIcon } from "@heroicons/react/24/solid";
-import React, { useState } from "react"; 
+import { ClockIcon, MapPinIcon, CalendarIcon, SparklesIcon } from "@heroicons/react/24/solid";
 import Link from "next/link";
-import { DayPicker } from "react-day-picker"; 
+import { useState } from "react";
+import { DayPicker, DateRange, getDefaultClassNames } from "react-day-picker"; 
+import { format, addDays } from "date-fns";
 import "react-day-picker/style.css";
+//import "@/styles/dayPickerCustomStyles.css";//
 
 
 export default function Hero() {
   const [isSameLocation, setIsSameLocation] = useState(true);
-  const [dateSelected, setDateSelected] = useState<Date>();
+  
+  // Single state for the entire range (Start & End)
+  const [range, setRange] = useState<DateRange | undefined>();
+  const [isCalendarOpen, setIsCalendarOpen] = useState(false);
+
+  // Time States
+  const [pickupTime, setPickupTime] = useState("");
+  const [dropoffTime, setDropoffTime] = useState("");
 
   return (
     <section
       id="home"
-      className="relative z-40 overflow-hidden pb-24 pt-28 sm:pt-36 lg:pb-[120px] lg:pt-[170px]"
+      className="relative z-40 overflow-visible pb-24 pt-28 sm:pt-36 lg:pb-[120px] lg:pt-[170px]"
     >
       <div className="mx-auto px-4 xl:container">
         <div className="-mx-4 flex flex-wrap items-center justify-center">
-              
-          {/* Left Column */}          
+          {/* Left Column */}
           <div className="w-full max-w-lg px-4 font-sans">
-            <form className="relative overflow-hidden rounded-3xl border border-white/20 bg-white p-8 shadow-[0_20px_50px_rgba(0,0,0,0.1)] backdrop-blur-sm">
-            
-              {/* Decorative Accent Elements */}
+            {/* Added overflow-visible so the popup can float outside */}
+            <form className="relative overflow-visible rounded-3xl border border-white/20 bg-white p-8 shadow-[0_20px_50px_rgba(0,0,0,0.1)] backdrop-blur-sm">
+              
               <div className="via-indigo-250 absolute left-0 top-0 h-1.5 w-full bg-gradient-to-r from-indigo-500 to-indigo-500" />
+              
               <div className="mb-8 text-center">
-
-                {/*pickup and dropoff Modal */}
-              <div className="bg-indigo-300 fixed h-[475px] w-[650px]">
-                <DayPicker
-                  animate
-                  mode="single"
-                  selected={dateSelected}
-                  onSelect={setDateSelected}
-                  footer={
-                    dateSelected ? `Selected: ${dateSelected.toLocaleDateString()}` 
-                    : "Pick a day."
-                  }
-                />
-                <div>{/* Calendar */}</div>
-                <div className="grid grid-cols-2 gap-4">
-                  <select
-                    aria-label="Pickup Time"
-                    name="pickupTime"
-                    className="h-16 block w-full rounded-sm border border-gray-500 bg-white px-4 text-black" 
-                    defaultValue=""               
-                  >
-                    <option value="" disabled hidden>
-                      Pickup Time
-                    </option>
-                    <option value="00:30:00">12:30 AM</option>
-                    <option value="01:00:00">1:00 AM</option>
-                    <option value="01:30:00">1:30 AM</option>
-                    <option value="02:00:00">2:00 AM</option>
-                    <option value="02:30:00">2:30 AM</option>
-                    <option value="03:00:00">3:00 AM</option>
-                    <option value="03:30:00">3:30 AM</option>
-                    <option value="04:00:00">4:00 AM</option>
-                    <option value="04:30:00">4:30 AM</option>
-                    <option value="05:00:00">5:00 AM</option>
-                    <option value="05:30:00">5:30 AM</option>
-                    <option value="06:00:00">6:00 AM</option>
-                    <option value="06:30:00">6:30 AM</option>
-                    <option value="07:00:00">7:00 AM</option>
-                    <option value="07:30:00">7:30 AM</option>
-                    <option value="08:00:00">8:00 AM</option>
-                    <option value="08:30:00">8:30 AM</option>
-                    <option value="09:00:00">9:00 AM</option>
-                    <option value="09:30:00">9:30 AM</option>
-                    <option value="10:00:00">10:00 AM</option>
-                    <option value="10:30:00">10:30 AM</option>
-                    <option value="11:00:00">11:00 AM</option>
-                    <option value="11:30:00">11:30 AM</option>
-                    <option value="12:00:00">12:00 PM</option>
-                    <option value="12:30:00">12:30 PM</option>
-                    <option value="13:00:00">1:00 PM</option>
-                    <option value="13:30:00">1:30 PM</option>
-                    <option value="14:00:00">2:00 PM</option>
-                    <option value="14:30:00">2:30 PM</option>
-                    <option value="15:00:00">3:00 PM</option>
-                    <option value="15:30:00">3:30 PM</option>
-                    <option value="16:00:00">4:00 PM</option>
-                    <option value="16:30:00">4:30 PM</option>
-                    <option value="17:00:00">5:00 PM</option>
-                    <option value="17:30:00">5:30 PM</option>
-                    <option value="18:00:00">6:00 PM</option>
-                    <option value="18:30:00">6:30 PM</option>
-                    <option value="19:00:00">7:00 PM</option>
-                    <option value="19:30:00">7:30 PM</option>
-                    <option value="20:00:00">8:00 PM</option>
-                    <option value="20:30:00">8:30 PM</option>
-                    <option value="21:00:00">9:00 PM</option>
-                    <option value="21:30:00">9:30 PM</option>
-                    <option value="22:00:00">10:00 PM</option>
-                    <option value="22:30:00">10:30 PM</option>
-                    <option value="23:00:00">11:00 PM</option>
-                    <option value="23:30:00">11:30 PM</option>
-                    <option value="00:00:00">12:00 AM</option>
-                  </select>
-                  <ClockIcon className="size-6 text-indigo-600 pointer-events-none absolute left-2 top-1/2 z-10 flex -translate-y-1/2 " />
-                </div>
-              </div>
                 <h2 className="text-3xl font-extrabold tracking-tight text-slate-900">
                   Book your Hertz car rental today!
                 </h2>
                 <p className="mt-2 text-sm text-slate-500">
                   Premium Hertz rentals at your fingertips.
-                </p>                
+                </p>
               </div>
-                
-              {/* 3. Conditional Logic for Inputs */}
+
+              {/* Location Inputs (Unchanged) */}
               {isSameLocation ? (
-                // Single Input Mode
                 <InputWithIcon
                   type="text"
                   id="pickup-dropoff-location"
@@ -124,10 +55,7 @@ export default function Hero() {
                   <MapPinIcon className="size-5" />
                 </InputWithIcon>
               ) : (
-                
                 <>
-                   
-                  {/* Pickup Location */}
                   <InputWithIcon
                     type="text"
                     id="pickup-location"
@@ -136,29 +64,24 @@ export default function Hero() {
                   >
                     <MapPinIcon className="size-5" />
                   </InputWithIcon>
-
-                  {/* Drop-Off Location */}
                   <InputWithIcon
                     type="text"
                     id="dropoff-location"
                     name="dropoff-location"
-                    placeholder="e.g., DFW Airport"
+                    placeholder="e.g., LAX Airport"
                   >
                     <MapPinIcon className="size-5" />
                   </InputWithIcon>
                 </>
               )}
 
-             
-
-              {/* Same Dropoff Checkbox */}
               <div className="mb-8 flex items-center gap-3">
                 <div className="relative inline-flex h-6 w-11 shrink-0 cursor-pointer items-center">
                   <input
                     id="same-dropoff"
                     type="checkbox"
                     checked={isSameLocation}
-                    onChange={() => setIsSameLocation(!isSameLocation)} // 4. Toggle the state
+                    onChange={() => setIsSameLocation(!isSameLocation)}
                     className="h-5 w-5 cursor-pointer rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
                   />
                 </div>
@@ -169,40 +92,99 @@ export default function Hero() {
                   Same Drop-Off Location
                 </label>
               </div>
-              {/* Dates Grid */}
-              <div className="mb-8 grid grid-cols-2 gap-4">
-                <div className="group">
-                  <label
-                    htmlFor="pickup-date"
-                    className="mb-2 flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-slate-500 group-focus-within:text-indigo-600"
-                  >
-                    Pickup Date
-                  </label>
+
+              {/* UNIFIED DATES & TIME SECTION */}
+              <div className="relative mb-8">
+                <label className="mb-2 flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-slate-500">
+                  Rental Period
+                </label>
+                
+                {/* The Trigger Input - Shows selected range */}
+                <div
+                  onClick={() => setIsCalendarOpen(!isCalendarOpen)}
+                  className="group relative cursor-pointer"
+                >
+                  <div className="pointer-events-none absolute left-4 top-1/2 z-10 flex -translate-y-1/2 items-center text-indigo-600">
+                     <CalendarIcon className="size-5" />
+                  </div>
                   <input
-                    type="date"
-                    id="pickup-date"
-                    name="pickup-date"
-                    className="w-full rounded-2xl border-2 border-slate-100 bg-slate-50 px-4 py-3 font-semibold text-slate-900 transition-all focus:border-indigo-500 focus:bg-white focus:outline-none"
+                    type="text"
+                    readOnly
+                    placeholder="Select Pickup & Return Dates"
+                    value={
+                      range?.from
+                        ? `${format(range.from, "MMM dd, yyyy")} ${range.to ? ` - ${format(range.to, "MMM dd, yyyy")}` : ""}`
+                        : ""
+                    }
+                    className="w-full cursor-pointer rounded-2xl border-2 border-slate-100 bg-slate-50 py-4 pl-12 pr-4 text-lg font-semibold text-slate-900 transition-all focus:border-indigo-500 focus:bg-white focus:outline-none"
                   />
                 </div>
 
-                <div className="group">
-                  <label
-                    htmlFor="return-date"
-                    className="mb-2 flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-slate-500 group-focus-within:text-indigo-600"
-                  >
-                    Return Date
-                  </label>
-                  <input
-                    type="date"
-                    id="return-date"
-                    name="return-date"
-                    className="w-full rounded-2xl border-2 border-slate-100 bg-slate-50 px-4 py-3 font-semibold text-slate-900 transition-all focus:border-indigo-500 focus:bg-white focus:outline-none"
-                  />
-                </div>
+                {/* THE POPUP MODAL */}
+                {isCalendarOpen && (
+                  <div className="absolute left-0 top-0 -mt-69 z-50 w-[650px] -translate-x-[15%] rounded-3xl border border-gray-100 bg-white p-6 shadow-2xl sm:w-[600px] sm:-translate-x-4">
+                    
+                    {/* 1. Dual Month Calendar */}
+                    <DayPicker
+                      mode="range"
+                      min={2}
+                      selected={range}
+                      onSelect={setRange}
+                      numberOfMonths={2}
+                      pagedNavigation
+                      showOutsideDays
+                      classNames={rangeClassNames} // Using the new styles below
+                    />
+
+                    {/* 2. Time Pickers (Inside the Modal) */}
+                    <div className="mt-6 grid grid-cols-2 gap-4 border-t border-gray-100 pt-6">
+                      
+                      {/* Pickup Time */}
+                      <div className="relative">
+                        <select
+                          value={pickupTime}
+                          onChange={(e) => setPickupTime(e.target.value)}
+                          className="w-full appearance-none rounded-xl border border-gray-200 bg-white py-3 pl-10 pr-4 text-sm font-medium text-slate-900 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+                        >
+                          <option value="" disabled>Pickup Time</option>
+                          <option value="09:00">09:00 AM</option>
+                          <option value="10:00">10:00 AM</option>
+                          <option value="11:00">11:00 AM</option>
+                          <option value="12:00">12:00 PM</option>
+                        </select>
+                        <ClockIcon className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
+                      </div>
+
+                      {/* Dropoff Time */}
+                      <div className="relative">
+                        <select
+                           value={dropoffTime}
+                           onChange={(e) => setDropoffTime(e.target.value)}
+                           className="w-full appearance-none rounded-xl border border-gray-200 bg-white py-3 pl-10 pr-4 text-sm font-medium text-slate-900 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+                        >
+                          <option value="" disabled>Drop-off Time</option>
+                          <option value="09:00">09:00 AM</option>
+                          <option value="10:00">10:00 AM</option>
+                          <option value="11:00">11:00 AM</option>
+                          <option value="12:00">12:00 PM</option>
+                        </select>
+                        <ClockIcon className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
+                      </div>
+                    </div>
+
+                    {/* 3. Apply Button */}
+                    <button
+                      type="button"
+                      onClick={() => setIsCalendarOpen(false)}
+                      className="mt-4 w-full rounded-xl bg-black py-3 text-sm font-bold text-white transition-colors hover:bg-gray-800"
+                    >
+                      Apply
+                    </button>
+                  </div>
+                )}
               </div>
 
-              {/* Submit Button (Optional placeholder) */}
+              {/* Main Form Submit */}
               <button
                 type="button"
                 className="hover:shadow-2xs w-full rounded-full bg-gradient-to-r from-indigo-200 to-indigo-700 py-4 text-base font-medium text-white shadow-lg transition-all duration-300 hover:from-indigo-300 hover:to-indigo-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
@@ -210,11 +192,9 @@ export default function Hero() {
                 Find a Car
               </button>
             </form>
-          
           </div>
-          
-          {/* Right Column */}
 
+          {/* Right Column (Text) - Unchanged */}
           <div className="w-full px-4 lg:w-7/12">
             <div className="mx-auto mb-12 max-w-[720px] text-center lg:mb-0 lg:ml-0 lg:text-left">
               <h1 className="font-heading mb-5 max-w-[530px] text-2xl font-semibold sm:text-4xl md:text-[50px] md:leading-[60px] dark:text-white">
@@ -230,171 +210,18 @@ export default function Hero() {
                 />
               </h1>
               <p className="text-dark-text mb-12 text-base">
-                Handcrafted Next.js starter for your next - Startup, Business,
-                Agency or SaaS Website.
+                Handcrafted Next.js starter for your next - Startup, Business, Agency or SaaS Website.
               </p>
-              <div className="flex flex-wrap items-center justify-center lg:justify-start">
-                <h2 className="text-3xl font-bold text-white sm:text-4xl">
-                  Meet our newest fleet
-                </h2>
-                <p className="mt-4 text-lg text-white">
-                  New rentalcars. Round trip or one-way. Let's go!
-                </p>
-              </div>
-              <div className="mt-10 flex-wrap sm:flex">
-                <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
-                  <div className=" border-white/20">
-                    <h3 className="text-xl font-bold text-white">
-                      #1 Loyalty Program
-                    </h3>
-                    <p className="mt-2 text-gray-200">
-                      Voted by customers via Newsweek*
-                    </p>
-                  </div>
-                  <div className=" border-white/20">
-                    <h4 className="text-xl font-bold text-white">
-                      Skip the line
-                    </h4>
-                    <p className="mt-2 text-gray-200">No hassle, just drive</p>
-                  </div>
-                  <div className=" border-white/20">
-                    <h5 className="text-xl font-bold text-white">
-                      Trusted for 100+ years
-                    </h5>
-                    <p className="mt-2 text-gray-200">
-                      With 10k+ rental locations worldwide
-                    </p>
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
         </div>
-      </div>
-      <div className="bg-noise-pattern absolute bottom-0 left-0 -z-10 h-full w-full bg-cover bg-center opacity-10 dark:opacity-40"></div>
-      <div className="absolute right-0 top-0 -z-10">
-        <svg
-          width="1356"
-          height="860"
-          viewBox="0 0 1356 860"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <g opacity="0.5" filter="url(#filter0_f_201_2181)">
-            <rect
-              x="450.088"
-              y="-126.709"
-              width="351.515"
-              height="944.108"
-              transform="rotate(-34.6784 450.088 -126.709)"
-              fill="url(#paint0_linear_201_2181)"
-            />
-          </g>
-          <defs>
-            <filter
-              id="filter0_f_201_2181"
-              x="0.0878906"
-              y="-776.711"
-              width="1726.24"
-              height="1876.4"
-              filterUnits="userSpaceOnUse"
-              colorInterpolationFilters="sRGB"
-            >
-              <feFlood floodOpacity="0" result="BackgroundImageFix" />
-              <feBlend
-                mode="normal"
-                in="SourceGraphic"
-                in2="BackgroundImageFix"
-                result="shape"
-              />
-              <feGaussianBlur
-                stdDeviation="225"
-                result="effect1_foregroundBlur_201_2181"
-              />
-            </filter>
-            <linearGradient
-              id="paint0_linear_201_2181"
-              x1="417.412"
-              y1="59.4717"
-              x2="966.334"
-              y2="603.857"
-              gradientUnits="userSpaceOnUse"
-            >
-              <stop stopColor="#ABBCFF" />
-              <stop offset="0.859375" stopColor="#4A6CF7" />
-            </linearGradient>
-          </defs>
-        </svg>
-      </div>
-      <div className="absolute bottom-0 left-0 -z-10">
-        <svg
-          width="1469"
-          height="498"
-          viewBox="0 0 1469 498"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <g opacity="0.3" filter="url(#filter0_f_201_2182)">
-            <rect
-              y="450"
-              width="1019"
-              height="261"
-              fill="url(#paint0_linear_201_2182)"
-            />
-          </g>
-          <defs>
-            <filter
-              id="filter0_f_201_2182"
-              x="-450"
-              y="0"
-              width="1919"
-              height="1161"
-              filterUnits="userSpaceOnUse"
-              colorInterpolationFilters="sRGB"
-            >
-              <feFlood floodOpacity="0" result="BackgroundImageFix" />
-              <feBlend
-                mode="normal"
-                in="SourceGraphic"
-                in2="BackgroundImageFix"
-                result="shape"
-              />
-              <feGaussianBlur
-                stdDeviation="225"
-                result="effect1_foregroundBlur_201_2182"
-              />
-            </filter>
-            <linearGradient
-              id="paint0_linear_201_2182"
-              x1="-94.7239"
-              y1="501.47"
-              x2="-65.8058"
-              y2="802.2"
-              gradientUnits="userSpaceOnUse"
-            >
-              <stop stopColor="#ABBCFF" />
-              <stop offset="0.859375" stopColor="#4A6CF7" />
-            </linearGradient>
-          </defs>
-        </svg>
       </div>
     </section>
   );
 }
 
-function InputWithIcon({
-  type,
-  id,
-  name,
-  placeholder,
-  children,
-}: {
-  type: string;
-  id: string;
-  name: string;
-  placeholder: string;
-  children: React.ReactNode;
-}) {
+// Ensure "InputWithIcon" is defined at the bottom (same as before)
+function InputWithIcon({ type, id, name, placeholder, children }: { type: string; id: string; name: string; placeholder: string; children: React.ReactNode; }) {
   return (
     <div className="group mb-6">
       <label className="mb-2 items-center gap-2 text-xs font-bold uppercase tracking-wider text-slate-500 transition-colors group-focus-within:text-indigo-600">
@@ -415,3 +242,29 @@ function InputWithIcon({
     </div>
   );
 }
+
+const rangeClassNames = {
+  root: "w-full font-sans",
+  months: "flex flex-col sm:flex-row space-y-4 sm:space-x-8 sm:space-y-0 justify-center", // Side by side months
+  caption: "flex justify-center pt-1 relative items-center mb-4",
+  caption_label: "text-base font-bold text-slate-900",
+  nav: "space-x-1 flex items-center absolute inset-0 justify-between",
+  nav_button: "p-1 hover:bg-slate-100 rounded-md text-slate-500 hover:text-black transition-colors",
+  table: "w-full border-collapse space-y-1",
+  head_row: "flex",
+  head_cell: "text-slate-400 rounded-md w-9 font-normal text-[0.8rem] uppercase tracking-wider",
+  row: "flex w-full mt-2",
+  
+  // Base style for all days
+  day: "h-9 w-9 p-0 font-normal hover:bg-slate-100 rounded-full text-slate-900 transition-colors",
+  
+  // RANGE STYLES
+  range_start: "bg-black text-white hover:bg-black hover:text-white rounded-l-full rounded-r-none",
+  range_end: "bg-black text-white hover:bg-black hover:text-white rounded-r-full rounded-l-none",
+  range_middle: "bg-slate-100 text-slate-900 rounded-none hover:bg-slate-200",
+  
+  day_today: "font-bold text-indigo-600",
+  day_outside: "text-slate-300 opacity-50",
+  day_disabled: "text-slate-300 opacity-50",
+  day_hidden: "invisible",
+};
