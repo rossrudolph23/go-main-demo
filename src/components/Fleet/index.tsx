@@ -1,8 +1,10 @@
+import { getFleetMakeModel} from "@/app/libs/query";
 import SectionTitle from "../Common/SectionTitle";
 import FleetContent from "./FleetContent";
-import AboutContent from "./FleetContent";
+      
+export default async function Fleet() {
+ const fleet = await getFleetMakeModel() as {make: string; model: string;}[];
 
-export default function Fleet() {
   return (
     <section id="fleet" className="pt-14 sm:pt-20 lg:pt-[130px]">
       <div className="px-4 xl:container">
@@ -68,7 +70,7 @@ export default function Fleet() {
               </defs>
             </svg>
           </div>
-          <FleetContent />
+          <FleetContent fleetData={fleet} />
         </div>
       </div>
     </section>

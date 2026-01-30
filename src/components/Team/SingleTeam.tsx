@@ -4,7 +4,7 @@ import Image from "next/image";
 export default function SingleTeam({ team }: { team: Team }) {
   return (
     <div className="w-full px-4 md:w-1/2 lg:w-1/4">
-      <div className="xs:max-w-[370px] group mx-auto mb-10 max-w-[300px] text-center">
+      <div className="xs:max-w-92.5 group mx-auto mb-10 max-w-75 text-center">
         <div className="aspect-360/370 relative mb-8 overflow-hidden rounded-sm">
           <Image
             src={team?.image}

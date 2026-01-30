@@ -4,6 +4,7 @@ import { useState } from "react";
 import TabPanel from "./TabPanel";
 import Card from "./Card";
 
+
 const tabButtons = [
   {
     id: crypto.randomUUID(),
@@ -32,7 +33,14 @@ const tabButtons = [
   },
 ];
 
-const fleet = [
+/* 
+  make
+  model
+  image?
+  imageAlt?
+  */
+
+/*const fleet = [
   {
     id: "123",
     title: "Nissan Altima",
@@ -75,12 +83,10 @@ const fleet = [
     imgAlt: "Photo of a Nissan Altima",
     cardUrl: "https://google.com/",
   },
-];
+];*/
 
-export default function FleetContent() {
+export default function FleetContent({fleetData}: {fleetData: {make: string; model: string;}[]}) {
   const [activeTab, setActiveTab] = useState<string>(tabButtons[0].value);
-
-  // const fleet = await getAutoData(activeTab);
 
   return (
     <>
@@ -97,24 +103,37 @@ export default function FleetContent() {
         ))}
       </div>
       <div className="w-full">
-        <div className="grid gap-5 rounded-full sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-          {fleet.map((autoData) => (
-            <Card key={autoData.id} data={autoData} />
-          ))}
-        </div>
-      </div>
+        {activeTab === "about" && (
+          <div className="grid grid-cols-3">{/*<Card data=''/>*/}</div>
+        )}
+        {activeTab === "sedans" && (
+          <div className="grid 1g:grid-cols-4 md:grid-cols-3 gap-5">
+             {fleetData.map((autodata, index) => {
+              return (
+              <div key={index}>
+              <Card data={{id: index, title: autodata.make + " " + autodata.model, imgSrc: "/images/team/image-2.jpg", imgAlt: '' }}/>
+              </div>)})}
+          </div>
+        )}
 
-      {/* {activeTab === "suvs" && (
-        <div className="flex flex-wrap gap-5">
-          {fleet.map((autoData) => {
-            return (
-              <div key={autoData.id} className='w-1/4 max-w-3xs'>
-                <Card data={autoData} />
-              </div>
-            );
-          })}
-        </div>
-      )} */}
-    </>
+        {activeTab === "suvs" && (
+          <div className="grid 1g:grid-cols-4 md:grid-cols-3 gap-5">
+          {fleetData.map((autodata, index) => {
+          return (
+          <div key={index}>
+          <Card 
+            data={{
+              id: index, 
+              title: autodata.make + " " + autodata.model, 
+              imgSrc: "/images/team/image-2.jpg", 
+              imgAlt: '' }}/>
+          </div>)})}
+          </div>
+        )}
+        {activeTab === "motorcycles" && <div>Motorcycles Gallery</div>}
+
+      </div>
+    </>     
   );
 }
+
