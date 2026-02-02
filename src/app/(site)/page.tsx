@@ -13,6 +13,8 @@ import { Metadata } from "next";
 import { integrations, messages } from "../../../integrations.config";
 import Offers from "@/components/Home/Offers";
 import Fleet from "@/components/Fleet";
+import Accordion from "@/components/Other/Accordion";
+import Accordion2 from "@/components/Other/Accordion2";
 
 const siteName = process.env.SITE_NAME;
 
@@ -38,6 +40,8 @@ export default function Home() {
       {integrations?.isSanityEnabled && <HomeBlogSection />}
       <Support />
       <CallToAction />
+      <Accordion />
+      <Accordion2 />
     </>
   );
 }
